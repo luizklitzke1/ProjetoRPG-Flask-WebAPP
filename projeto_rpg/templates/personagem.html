@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <article class="media content-section">
+        <div class="media-body">
+
+            <div class="article-metadata">
+                <a class="mr-2" href="#">Raça: {{ personagem.raca }}</a>
+                <small class="text-muted">Classe: {{ personagem.classe }}</small>
+            </div>
+
+            <h2><a class="article-title" href="#">{{ personagem.nome }}</a></h2>
+            <p class="article-content">Nível: {{ personagem.nivel }}</p>
+            <img class="rounded-circle account-img" src="{{ url_for('static', filename='imagens_personagens/' + personagem.foto) }}">
+            
+            <p class="article-content">{{ personagem.antecedente }}</p>
+            
+            <p>Força: {{ personagem.forca }}</p> 
+            <p>Destreza: {{ personagem.forca }}</p> 
+            <p>Constituição: {{ personagem.forca }}</p> 
+            <p>Inteligencia: {{ personagem.forca }}</p> 
+            <p>Sabedoria: {{ personagem.forca }}</p> 
+            <p>Carisma: {{ personagem.forca }}</p> 
+
+
+            <p class="article-content">Criador por: {{ personagem.autor.nome }}</p>
+            <small class="text-muted">Criado em: {{ personagem.criacao.strftime('%d-%m-%Y') }}</small>
+            
+            <!-- Poder editar os dados caso seja o autor ou admin -->
+            {% if personagem.autor == current_user or current_user.isAdmin == True %}
+                <div>
+                    <a class="btn btn-secondary btn-sm m-1" href="{{url_for('editar_personagem',personagem_id = personagem.id)}}"> Editar</a>
+                    <button type="button" class="btn btn-danger btn-sm m-1"  data-toggle="modal" data-target="#DeleteModal">Apagar</button>
+                </div>
+            {% endif %}
+          </div>
+        <br>
+    </article>
+
+    <!-- Modal -->
+    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLongTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="DeleteModalLongTitle">Apagar {{personagem.nome}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">Tem certeza que deseja apagar esse personagem?</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Uma vez apagado, esse personagem não podera mais ser recuperado!
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            <form action="{{url_for('apagar_personagem', personagem_id=personagem.id )}}" method="POST">
+            <input class="btn btn-danger" type="submit" value="Apagar">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock content %}

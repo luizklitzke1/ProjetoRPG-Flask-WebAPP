@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <div class="content-section">
+
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Logar usuário</legend>
+
+                <!-- Nome de usuário-->
+                <div class="form-group">
+                    {{ form.nome.label(class="form-control-label") }}
+                    {% if form.nome.errors %}
+                        {{ form.nome(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.nome.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.nome(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <!-- Senha do usuário-->
+                <div class="form-group">
+                    {{ form.senha.label(class="form-control-label") }}
+                    {% if form.senha.errors %}
+                        {{ form.senha(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.senha.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.senha(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <!-- Manter logado -->
+                <div class="form-check">
+                    {{ form.permanecer_logado(class="form-check-input") }}
+                    {{ form.permanecer_logado.label(class="form-check-label") }}
+                </div>
+            </fieldset>
+
+            <!-- Enviar -->
+            <div class="form-group">
+                {{ form.enviar(class="btn btn-outline-info") }}
+            </div>
+
+            <!-- Recuperação de senha -->
+            <small class="text-muted ml-2">
+                <a href="#">Esqueceu o seu login?</a>
+            </small>
+        </form>
+        
+    </div>
+
+    <!-- Criar uma nova conta caso não possua ainda-->
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Ainda não possui uma conta? <a class="ml-2" href="{{ url_for('registrar_usuario') }}">Registre-se agora mesmo!</a>
+        </small>
+    </div>
+
+{% endblock content %}

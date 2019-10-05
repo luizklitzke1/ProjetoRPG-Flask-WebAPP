@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Site que desponibiliza um sistema simples e prático para 
+                                      registro, pesquisa e atualização de personagens de RPG ">
+    <meta name="keywords" content="rpg, registro, crud, personagem, ded">
+    <link rel="icon" type="image/png" href="static/d20.png" />
+    <!--Link para CSS  do Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Link para estilo customizado-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+
+    {% if titulo %}
+        <title>Projeto RPG - {{ titulo }}</title>
+    {% else %}
+        <title>Projeto RPG</title>
+    {% endif %}
+
+</head>
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+
+          <!-- Logo do site -->
+          <a class="navbar-brand mr-4" href="/">Projeto RPG</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Alternar visualização">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Itens - Menu do Cabeçalho -->
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
+              <a class="nav-item nav-link" href="{{ url_for('about') }}">About</a>
+              {% if current_user.is_authenticated %}
+                <a class="nav-item nav-link" href="{{ url_for('registrar_personagem') }}">Registrar personagem</a>
+              {% endif %}
+            </div>
+
+            <!-- Direita da barra - Parte de login -->
+            <div class="navbar-nav">
+              {% if current_user.is_authenticated %}
+                <a class="nav-item nav-link" href="{{ url_for('perfil_usuario', usuario_id = current_user.id) }}">{{current_user.nome}}</a>
+                <a class="nav-item nav-link" href="{{ url_for('deslogar_usuario') }}">Deslogar</a>
+              {% else %}
+                <a class="nav-item nav-link" href="{{ url_for('logar_usuario') }}">Login</a>
+                <a class="nav-item nav-link" href="{{ url_for('registrar_usuario') }}">Registrar-se</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Parte principal do site - Conteúdo -->
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+
+          <!-- Mensagens de notificação dos formulários pelo FLASH-->
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+
+          <!-- Conteúdo propriamente dito -->
+          {% block content %}{% endblock %}
+        </div>
+        
+      </div>
+    </main>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

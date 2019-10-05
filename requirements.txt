@@ -1,0 +1,7 @@
+flask 
+flask_sqlalchemy 
+Pillow
+flask_login 
+datetime 
+flask_wtf 
+
