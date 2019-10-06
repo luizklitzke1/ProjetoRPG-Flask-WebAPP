@@ -29,7 +29,7 @@
             <!-- Poder editar os dados caso seja o autor ou admin -->
             {% if personagem.autor == current_user or current_user.isAdmin == True %}
                 <div>
-                    <a class="btn btn-secondary btn-sm m-1" href="{{url_for('editar_personagem',personagem_id = personagem.id)}}"> Editar</a>
+                    <a class="btn btn-dark btn-sm m-1" href="{{url_for('editar_personagem',personagem_id = personagem.id)}}"> Editar</a>
                     <button type="button" class="btn btn-danger btn-sm m-1"  data-toggle="modal" data-target="#DeleteModal">Apagar</button>
                 </div>
             {% endif %}

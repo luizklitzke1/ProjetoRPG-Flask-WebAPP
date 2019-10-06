@@ -7,7 +7,7 @@
             <div class="media-body">
                 <h2 class="account-heading">
                 {% if usuario.isAdmin == True %}
-                <span style = "color: crimson">[Admin]</span>
+                <span style = "color: #9F0000">[Admin]</span>
                 {% endif %}
                 {{usuario.nome}}
                 </h2>
@@ -69,7 +69,7 @@
 
             <!-- Botão de enviar -->
             <div class="form-group">
-                {{ form.enviar(class="btn btn-outline-info") }}
+                {{ form.enviar(class="btn btn-danger") }}
             </div>
 
         </form>
@@ -80,7 +80,7 @@
 
     <fieldset>
     <h2>Personagens registrados</h2>
-    {% for personagem in personagens %}
+    {% for personagem in personagens.items %}
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
@@ -92,11 +92,20 @@
             <img class="rounded-circle account-img" src="{{ url_for('static', filename='imagens_personagens/' + personagem.foto) }}">
             <p class="article-content">Criador por: <a  href="{{url_for('perfil_usuario', usuario_id = personagem.autor.id)}}">{{ personagem.autor.nome }}</a></p>
             <small class="text-muted">Criado em: {{ personagem.criacao.strftime('%d-%m-%Y') }}</small>
-            
           </div>
           <br>
         </article>
-
     {% endfor %}
+        {% for pagina in personagens.iter_pages(left_edge=3, right_edge=3, left_current=3,right_current=3) %}
+        {% if pagina %}
+            {% if pagina == personagens.page%}
+            <a class="btn btn-danger mb-4" href="{{url_for('home', pagina=pagina)}}">{{pagina}}</a>
+            {% else %}
+            <a class="btn btn-dark mb-4" href="{{url_for('home', pagina=pagina)}}">{{pagina}}</a>
+            {% endif %}
+        {% else %}
+            ...
+        {% endif %}
+        {% endfor %}
     </fieldset>
 {% endblock content %}

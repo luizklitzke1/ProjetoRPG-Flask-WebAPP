@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
 
-    {% for personagem in personagens %}
+    {% for personagem in personagens.items %}
         <article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
@@ -13,12 +13,22 @@
             <img class="rounded-circle account-img" src="{{ url_for('static', filename='imagens_personagens/' + personagem.foto) }}">
             <p class="article-content">Criador por: <a  href="{{url_for('perfil_usuario', usuario_id = personagem.autor.id)}}">{{ personagem.autor.nome }}</a></p>
             <small class="text-muted">Criado em: {{ personagem.criacao.strftime('%d-%m-%Y') }}</small>
-          
-
           </div>
           <br>
         </article>
         
     {% endfor %}
     
+    {% for pagina in personagens.iter_pages(left_edge=3, right_edge=3, left_current=3,right_current=3) %}
+      {% if pagina %}
+        {% if pagina == personagens.page%}
+          <a class="btn btn-danger mb-4" href="{{url_for('home', pagina=pagina)}}">{{pagina}}</a>
+        {% else %}
+          <a class="btn btn-dark mb-4" href="{{url_for('home', pagina=pagina)}}">{{pagina}}</a>
+        {% endif %}
+      {% else %}
+        ...
+      {% endif %}
+    {% endfor %}
+
 {% endblock content %}

@@ -1,23 +1,30 @@
 body {
-  background: #fafafa;
-  color: #333333;
+  background: #3B3D3E;
+  color: #D2D0CC;
   margin-top: 5rem;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: #444444;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #D2D0CC;
 }
 
 .bg-steel {
-  background-color: #5f788a;
+  background-color: #161616;
 }
 
 .site-header .navbar-nav .nav-link {
-  color: #cbd5db;
+  color: #9F0000;
+  font-weight: bold;
 }
 
 .site-header .navbar-nav .nav-link:hover {
-  color: #ffffff;
+  color: #CE0000;
+  font-weight: bold;
 }
 
 .site-header .navbar-nav .nav-link.active {
@@ -25,19 +32,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .content-section {
-  background: #ffffff;
+  background: #141515;
   padding: 10px 20px;
-  border: 1px solid #dddddd;
+  border: 1px solid #141515;
   border-radius: 3px;
   margin-bottom: 20px;
 }
 
 .article-title {
-  color: #444444;
+  color: #9F0000;
 }
 
 a.article-title:hover {
-  color: #428bca;
+  color: #9F0000;
   text-decoration: none;
 }
 
@@ -57,8 +64,13 @@ a.article-title:hover {
   border-bottom: 1px solid #e3e3e3
 }
 
+.article-metadata a {
+  color: #D2D0CC;
+  text-decoration: none;
+}
+
 .article-metadata a:hover {
-  color: #333;
+  color: #9F0000;
   text-decoration: none;
 }
 
