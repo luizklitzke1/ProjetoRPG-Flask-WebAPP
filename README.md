@@ -1,5 +1,3 @@
-[![rpglogo.png](https://i.ibb.co/SQ0r1ZS/rpglogo.png)](https://i.ibb.co/SQ0r1ZS/rpglogo.png)
-
 # WebApp - Projeto RPG
 
 Aplicação Web em Python desenvolvida utilizando, principalmente, **Flask**, **Jinja2** e **SQL Alchemy**, com a finalidade de representar um **CRUD** para personagens de RPG.
@@ -38,6 +36,14 @@ python3 -m pip install -r requirements.txt
 Como comentado anteriormente, o projeto apresenta todos os arquivos necessáriso para seu funcionamento livres para download e modificação, seguindo boas práticas de organização, identação, blueprints, etcs. ao decorrer de todos os arquivos. 
 
 Toda a funcionalidade é comentada de forma que qualquer usuário consiga compreender as funções, modificá-las e/ou reutilizá-las.
+
+## Banco de Dados
+
+A aplicação utiliza a biblioteca SQL Alchemy para o controle do Banco de Dados.
+O download do projeto já vem com um bando de dados que contem alguns personagens, usuários e avaliações.
+A estrutura e o dados podem ser visualizados com a utilização de uma série de programas, como o [DB Browser](https://sqlitebrowser.org/)
+
+[![db1.png](https://i.ibb.co/JFZ8LX9/db1.png)](https://i.ibb.co/JFZ8LX9/db1.png)
 
 ## Usuários
 
@@ -87,10 +93,10 @@ Para buscar por um personagem, pode-se escolher preencher uma série de campos s
 Tal processo de pesquisar seguinda alguns parametros informados, ou nãom, pode ser visto de forma resumida nessa parte do código:
 
 ```
-    personagens = db.session.query(Personagem).filter(
-                                                      Personagem.nome.like(f"%{form_procurar_pers.nome.data}%"),
-                                                      Personagem.raca.like(f"%{form_procurar_pers.raca.data}%"),
-                                                      Personagem.classe.like(f"%{form_procurar_pers.classe.data}%"),
-                                                     ).from_self().paginate(page=1, per_page=9)
+personagens = db.session.query(Personagem).filter(
+                                                 Personagem.nome.like(f"%{form_procurar_pers.nome.data}%"),
+                                                 Personagem.raca.like(f"%{form_procurar_pers.raca.data}%"),
+                                                 Personagem.classe.like(f"%{form_procurar_pers.classe.data}%"),
+                                                 ).from_self().paginate(page=1, per_page=9)
 ```
 
