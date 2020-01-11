@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+
+        <div class="d-flex justify-content-center h-100">
+		    
+            <div class="content-section aviso_erro">
+
+                <h1><span class="fonte_mec vermelho">Erro 500</span> - Alguma problema ocorreu!</h1>
+
+                <p class="text-justify">
+                    Ocorreu algum problema com a ação que você tentou executar, 
+                    por favor, tente novamente mais tarde.
+                </p>
+                <p class="text-justify">
+                    Ou <a href="{{ url_for('geral.mostrar_home')}}">clique aqui</a> para retornar para a Home
+                </p>
+            </div>
+        </div>
+
+
+
+{% endblock content %}

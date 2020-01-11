@@ -4,17 +4,16 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_mail import Mail
 
-from datetime import datetime
+from projeto_rpg.config import Config
 
 app = Flask(__name__)
 
-#Chave pra criptografia
-app.config['SECRET_KEY'] = 'bd023b5638a8f04016fdedf53a2f3736'
+app.config.from_object(Config)
 
-#Caminho e configuração para o Banco de Dados
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///rpg.db'
 db = SQLAlchemy(app)
+db.create_all
 
 #Funções para criação de Hash das senhas
 from flask_bcrypt import Bcrypt
@@ -22,8 +21,20 @@ bcrypt = Bcrypt(app)
 
 #Cria a moderação para controle de logins
 login_mananger = LoginManager(app)
-login_mananger.login_view ='logar_usuario'
+login_mananger.login_view ='usuarios.logar_usuario'
 login_mananger.login_message_category = 'info'
 
-#Importa as rotas no final para evitar problemas de import em loop
-from projeto_rpg import routes
+mail = Mail(app)
+
+#Importa as rotas dos Blueprints
+from projeto_rpg.usuarios.routes import usuarios
+app.register_blueprint(usuarios)
+
+from projeto_rpg.personagens.routes import personagens
+app.register_blueprint(personagens)
+
+from projeto_rpg.geral.routes import geral
+app.register_blueprint(geral)
+
+from projeto_rpg.erros.handlers import erros
+app.register_blueprint(erros)

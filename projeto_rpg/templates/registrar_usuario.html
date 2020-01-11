@@ -1,103 +1,107 @@
 {% extends "layout.html" %}
 {% block content %}
 
-    <div class="content-section">
-        <form method="POST" action="" enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
+    <div class="d-flex justify-content-center h-100">
+		    <div class="card p-4" style="min-width: 60%">
+                <form method="POST" action="" enctype="multipart/form-data">
+                    {{ form_registrar_usuario.hidden_tag() }}
 
-            <fieldset class="form-group">
+                    <fieldset class="form-group">
 
-                <legend class="border-bottom mb-4">Registar Novo Usuário</legend>
-               
-                <div class="form-group">
-                    {{ form.nome.label(class="form-control-label") }}
+                        <legend class="border-bottom mb-4">Registar Novo Usuário</legend>
+                    
+                        <div class="form-group">
+                            {{ form_registrar_usuario.nome.label(class="form-control-label") }}
 
-                    <!-- Nome de usuário-->
-                    {% if form.nome.errors %}
-                        {{ form.nome(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.nome.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
+                            <!-- Nome de usuário-->
+                            {% if form_registrar_usuario.nome.errors %}
+                                {{ form_registrar_usuario.nome(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form_registrar_usuario.nome.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form_registrar_usuario.nome(class="form-control form-control-lg") }}
+                            {% endif %}
                         </div>
-                    {% else %}
-                        {{ form.nome(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
 
-                <!-- E-mail -->
-                <div class="form-group">
-                    {{ form.email.label(class="form-control-label") }}
-                    {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.email.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
+                        <!-- E-mail -->
+                        <div class="form-group">
+                            {{ form_registrar_usuario.email.label(class="form-control-label") }}
+                            {% if form_registrar_usuario.email.errors %}
+                                {{ form_registrar_usuario.email(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form_registrar_usuario.email.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form_registrar_usuario.email(class="form-control form-control-lg") }}
+                            {% endif %}
                         </div>
-                    {% else %}
-                        {{ form.email(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
 
-                <!-- Senha do usuário-->
-                <div class="form-group">
-                    {{ form.senha.label(class="form-control-label") }}
-                    {% if form.senha.errors %}
-                        {{ form.senha(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.senha.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
+                        <!-- Senha do usuário-->
+                        <div class="form-group">
+                            {{ form_registrar_usuario.senha.label(class="form-control-label") }}
+                            {% if form_registrar_usuario.senha.errors %}
+                                {{ form_registrar_usuario.senha(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form_registrar_usuario.senha.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form_registrar_usuario.senha(class="form-control form-control-lg") }}
+                            {% endif %}
                         </div>
-                    {% else %}
-                        {{ form.senha(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
 
-                <!-- Confirmar a senha do usuário-->
-                <div class="form-group">
-                    {{ form.confirmar_senha.label(class="form-control-label") }}
-                    {% if form.confirmar_senha.errors %}
-                        {{ form.confirmar_senha(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.confirmar_senha.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
+                        <!-- Confirmar a senha do usuário-->
+                        <div class="form-group">
+                            {{ form_registrar_usuario.confirmar_senha.label(class="form-control-label") }}
+                            {% if form_registrar_usuario.confirmar_senha.errors %}
+                                {{ form_registrar_usuario.confirmar_senha(class="form-control form-control-lg is-invalid") }}
+                                <div class="invalid-feedback">
+                                    {% for error in form_registrar_usuario.confirmar_senha.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form_registrar_usuario.confirmar_senha(class="form-control form-control-lg") }}
+                            {% endif %}
                         </div>
-                    {% else %}
-                        {{ form.confirmar_senha(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                
-                <!-- Foto  -->
-                <div class="form-group">
-                    {{ form.foto.label() }}
-                    {{ form.foto(class='form-control-file') }}
-                    {% if form.foto.errors %}
-                            {% for error in form.foto.errors %}
-                                <span class='text-danger'>{{ error }}</span></br>
-                            {% endfor %}
-                    {% endif %}
+                        
+                        <!-- Foto  -->
+                        <div class="form-group">
+                            {{ form_registrar_usuario.foto.label() }}
+                            {{ form_registrar_usuario.foto(class='form-control-file') }}
+                            {% if form_registrar_usuario.foto.errors %}
+                                    {% for error in form_registrar_usuario.foto.errors %}
+                                        <span class='text-danger'>{{ error }}</span></br>
+                                    {% endfor %}
+                            {% endif %}
 
-                </div>
-            </fieldset>
+                        </div>
+                    </fieldset>
 
-                
+                        
 
-            <!-- Botão de enviar -->
-            <div class="form-group">
-                {{ form.enviar(class="btn btn-outline-info") }}
-            </div>
+                    <!-- Botão de enviar -->
+                    <div class="form-group">
+                        {{ form_registrar_usuario.botao_registrar(class="btn btn-success") }}
+                    </div>
 
-        </form>
+                    <!-- Apenas logar, caso já possua uma conta registrada -->
+                    <div class="border-top pt-3">
+                        <small class="text-muted">
+                            Já possuí uma conta no site? <a class="ml-2" href="{{ url_for('usuarios.logar_usuario') }}">Logar</a>
+                        </small>
+                    </div>
+
+                </form>
+            </div>    
     </div>
 
-    <!-- Apenas logar, caso já possua uma conta registrada -->
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Já possuí uma conta no site? <a class="ml-2" href="{{ url_for('logar_usuario') }}">Logar</a>
-        </small>
-    </div>
+    
 
 {% endblock content %}

@@ -1,0 +1,367 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <article class="media content-section">
+        <div class="media-body" >
+            <div class="container p-0 m-0">                
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="row p-0 m-0">
+                            <div class="col-md-2 p-0 text-center">
+                                    <img class="account-img mt-2" src="{{ url_for('static', filename='imagens_personagens/' + personagem.foto) }}">
+                                    <p class="article-content m-0">Criador por:  <a href="{{url_for('usuarios.mostrar_perfil_usuario', usuario_id = personagem.autor.id)}}"> {{ personagem.autor.nome }}</a></p>
+                                    <small class="text-muted">Criado em: {{ personagem.data_criacao.strftime('%d-%m-%Y') }}</small>
+                                <div class="container float-left text-left"></div>
+                                {% if personagem.nota == None %}
+                                    <p class="article-content mb-3"><span class="fonte_mec", style="color: #CE0000">Ainda não</span> avaliado pela comunidade!</span></p>
+                                {% else %}
+                                    <h2 class="text-center mb-3">Nota: <span style="color: #CE0000">{{personagem.nota}}</span></h2>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-10 ml-0">
+                                <div class="p-1 text-center">
+                                        <h2><a class="article-title" href="#">{{ personagem.nome }}</a></h2>
+                                </div>
+
+                                    <div class="row text-center">
+                                        <span class="col-md lead"><span class="vermelho">Raça:</span> {{ personagem.raca }}</span>
+                                        <span class="col-md lead"><span class="vermelho">Classe:</span> {{ personagem.classe }}</span>
+                                        <span class="col-md lead"><span class="vermelho">Nível: </span>{{ personagem.nivel }}</span>
+                                    </div>
+
+                                    <div class="container mt-4">
+                                        <div class="row p-0 text-center">
+                                                    
+                                            <div class="col" >
+                                                <span class="col mr-3 pl-4 vermelho fonte_mec">Força</span>
+                                                <span class="col"> {{ personagem.forca }}</span> 
+                                            </div>
+                                                    
+                                            <div class="col">
+                                                    <span class="col vermelho fonte_mec">Destreza</span> 
+                                                    <span class="col">{{ personagem.destreza }}</span>  
+                                            </div>
+                                            <div class="col">
+                                                <span class="col vermelho fonte_mec">Constituição</span> 
+                                                <span class="col">{{ personagem.constituicao }}</span> 
+                                            </div>
+                                            <div class="col">
+                                                <span class="col vermelho fonte_mec">Inteligencia</span> 
+                                                <span class="col">{{ personagem.inteligencia }}</span> 
+                                            </div>
+                                                
+                                            <div class="col">
+                                                <span class="col vermelho fonte_mec">Sabedoria</span>
+                                                <span class="col">{{ personagem.sabedoria }}</span>
+                                            </div>
+                            
+                                            <div class="col">
+                                                <span class="col vermelho fonte_mec">Carisma</span> 
+                                                <span class="col">{{ personagem.carisma }}</span> 
+                                            </div>
+                                        </div>
+
+                                        <div class="ml-3 p-3 text-justify">
+                                            <span>{{personagem.historia}}</span>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+
+
+            
+            <!-- Poder editar os dados ou remover caso seja o autor ou admin -->
+            {% if personagem.autor == current_user or current_user.isAdmin == True %}
+                <div class="text-right mt-4">
+                    <a class="btn btn-success btn-sm m-1" href="{{url_for('personagens.editar_personagem',personagem_id = personagem.id)}}"> Editar</a>
+                    <button type="button" class="btn btn-danger btn-sm m-1"  data-toggle="modal" data-target="#DeleteModal">Apagar</button>
+                </div>
+                <!-- Modal para apagar o personagem-->
+                <div class="modal fade" id="DeleteModal{{id}}" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="DeleteModalLongTitle">Apagar <span class="modal-nome">{{personagem.nome}}</span></h5>
+                            <span class="modal-span">Tem certeza que deseja apagar esse personagem?</span>
+                        </div>
+                        <div class="modal-body">
+                            Uma vez apagado, esse personagem não podera mais ser recuperado!
+                        </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        <form action="{{url_for('personagens.apagar_personagem', personagem_id = personagem.id)}}" method="POST">
+                    <input class="btn btn-danger" type="submit" value="Apagar">
+                </form>
+                </div>
+                </div>
+        </div>
+        </div>
+            {% endif %}
+        </div>
+        <br>
+    </article>
+
+    {% if not avaliacao_usuario and current_user.is_authenticated%}
+
+        <!-- Registrar uma nova avaliação -->
+        {% if personagem.autor != current_user %}
+        <div class="content-section p-4 pl-4 pr-4">
+            <fieldset class="justify-content-xl-center">
+
+            <form method="POST" action="" enctype="multipart/form-data">
+                {{ form_avaliar.hidden_tag() }}
+
+                <fieldset class="form-group">
+
+                    <legend class="border-bottom fonte_mec">Avaliar o personagem</legend>
+                
+                    <!-- Nota da avaliação -->
+                    <div class="form-group">
+                            {{ form_avaliar.nota.label(class="form-control-label") }}
+                            {% if form_avaliar.nota.errors %}
+                                {{ form_avaliar.nota(class="form-control form-control-lg is-invalid", type="number", min="0.1", max="5", step="0.1")  }}
+                                <div class="invalid-feedback">
+                                    {% for error in form_avaliar.nota.errors %}
+                                        <span>{{ error }}</span>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                {{ form_avaliar.nota(class="form-control form-control-lg", type="number", min="0.1", max="5", step="0.1" ) }}
+                            {% endif %}
+                    </div>
+
+                    <!-- Conteudo da avaliação -->
+                    <div class="form-group">
+                        {{ form_avaliar.conteudo.label(class="form-control-label") }}
+                        {% if form_avaliar.conteudo.errors %}
+                            {{ form_avaliar.conteudo(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form_avaliar.conteudo.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_avaliar.conteudo(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+
+                </fieldset>
+
+            <!-- Botão de enviar-->
+            <div class="row">
+                <div class="form-group col text-right">
+                    {{ form_avaliar.botao_avaliar(class="btn btn-success") }}
+                </div>
+            </div>
+
+            </form>
+            </fieldset>
+        
+        </div>
+        {% endif %}
+
+    
+    {% endif %}
+
+
+    {% if (avaliacoes.items)|length > 0  or avaliacao_usuario%}
+
+        <!-- Mostrar as avaliações do personagem-->
+        <fieldset class="justify-content-xl-center">
+        <h2 class="ml-1">Avaliações da comunidade</h2>
+
+        <div class="container-fluid">
+            <div class="row">
+
+                {% if avaliacao_usuario %}
+
+                    <div class="container">                
+                        <div class="card p-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2 text-center">
+                                        <img src="{{ url_for('static', filename='imagens_perfil/' + avaliacao_usuario.autor.foto) }}" class="img img-rounded img-fluid"/>
+                                        <p class="text-secondary text-center mt-2">Em: {{ avaliacao_usuario.data_postagem.strftime('%d-%m-%Y - %H:%M:%S') }}</p>
+                                    </div>
+                                    <div class="col-md-10">
+                                            <a class="float-left" href="{{url_for('usuarios.mostrar_perfil_usuario', usuario_id = avaliacao_usuario.autor.id)}}">
+                                            <h2>
+                                                {% if avaliacao_usuario.autor.isAdmin == True %}
+                                                        <span style = "color: #C60000">[Admin]</span>
+                                                {% endif %}
+                                                        <span>{{avaliacao_usuario.autor.nome}}</span>
+                                            </h2>
+                                            </a>
+                                            
+                                            <br><br>
+
+                                                <!-- Nota da avaliação -->
+                                                <form method="POST" action="" enctype="multipart/form-data">
+                                                {{ form_editar_avaliacao.hidden_tag() }}
+                                                <div class="form-group float-left">
+                                                        {{ form_editar_avaliacao.nota.label(class="form-control-label") }}
+                                                        {% if form_editar_avaliacao.nota.errors %}
+                                                            {{ form_editar_avaliacao.nota(class="form-control form-control-lg is-invalid", type="number", step="0.1")  }}
+                                                            <div class="invalid-feedback">
+                                                                {% for error in form_editar_avaliacao.nota.errors %}
+                                                                    <span>{{ error }}</span>
+                                                                {% endfor %}
+                                                            </div>
+                                                        {% else %}
+                                                            {{ form_editar_avaliacao.nota(class="form-control form-control-lg", type="number", min="0.1", max="5", step="0.1" ) }}
+                                                        {% endif %}
+                                                </div>
+                                            
+                                            <!-- Conteudo da avaliação -->
+                                            <div class="clearfix"></div>
+                                                {{ form_editar_avaliacao.conteudo.label(class="form-control-label") }}
+                                                {% if form_editar_avaliacao.conteudo.errors %}
+                                                    {{ form_editar_avaliacao.conteudo(class="form-control form-control-lg is-invalid", style="height:15em") }}
+                                                    <div class="invalid-feedback">
+                                                        {% for error in form_editar_avaliacao.conteudo.errors %}
+                                                            <span>{{ error }}</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                    
+                                                {% else %}
+                                                    {{ form_editar_avaliacao.conteudo(class="form-control form-control-lg", style="height:15em;") }}
+                                                {% endif %}
+                                            </div>
+
+                                    </div>
+
+                                            <!-- Enviar as modificações caso seja o autor-->
+                                            <div class="text-right mt-4">
+                                                    <div class="form-group text-right">
+                                                        {{ form_editar_avaliacao.botao_avaliar(class="btn btn-success") }}
+                                                    </div>
+                                            </div>
+                                            </form>
+
+                                        <!-- Poder remover caso seja o autor ou admin -->
+                                        <div class="text-right mt-4">
+                                            <button type="button" class="btn btn-danger btn-sm m-1"  data-toggle="modal" data-target="#DeleteModal{{avaliacao_usuario.autor.id}}">Apagar</button>
+                                        </div>
+
+                                        <!-- Modal para apagar uma avaliação-->
+                                        <div class="modal fade" id="DeleteModal{{avaliacao_usuario.autor.id}}" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLongTitle" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="DeleteModalLongTitle">Apagar <span class="modal-nome">avaliação?</span></h5>
+                                                <span class="modal-span">Tem certeza que deseja apagar essa avaliação de <span class="modal-nome">{{avaliacao_usuario.autor.nome}}</span>  do personagem <span class="modal-nome">{{personagem.nome}}?</span>
+                                            </div>
+                                            <div class="modal-body">
+                                                Uma vez apagado, essa avaliação não podera mais ser recuperada!
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <form action="{{url_for('personagens.apagar_avaliacao', personagem_id = personagem.id, autor_id = avaliacao_usuario.autor.id )}}" method="POST">
+                                                    <input class="btn btn-danger" type="submit" value="Apagar">
+                                                </form>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                    
+                            </div>   
+                            
+                        </div>
+                    </div>
+
+                {% endif %}
+                {% for avaliacao in avaliacoes.items %}
+
+                    <div class="container">                
+                        <div class="card p-3">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2 text-center">
+                                        <img src="{{ url_for('static', filename='imagens_perfil/' + avaliacao.autor.foto) }}" class="img img-rounded img-fluid"/>
+                                        <p class="text-secondary text-center mt-2">Em: {{ avaliacao.data_postagem.strftime('%d-%m-%Y - %H:%M:%S') }}</p>
+                                    </div>
+                                    <div class="col-md-10">
+                                            <a class="float-left" href="{{url_for('usuarios.mostrar_perfil_usuario', usuario_id = avaliacao.autor.id)}}">
+                                            <h2>
+                                                {% if avaliacao.autor.isAdmin == True %}
+                                                        <span style = "color: #C60000">[Admin]</span>
+                                                {% endif %}
+                                                        <span>{{avaliacao.autor.nome}}</span>
+                                            </h2>
+                                            </a>
+                                            
+                                            <br><br>
+                                            <!-- Nota da avaliação -->
+                                            <h2 class="float-left">Nota: <span style="color: #CE0000">{{avaliacao.nota}}</span></h2>
+                                            
+                                        <!-- Conteudo da avaliação -->
+                                        <div class="clearfix"></div>
+                                            <p class="text-justify">{{avaliacao.conteudo}}</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Poder remover caso seja admin -->
+                                    {% if current_user.isAdmin %}
+                                        <div class="text-right mt-4">
+                                            <button type="button" class="btn btn-danger btn-sm m-1"  data-toggle="modal" data-target="#DeleteModal{{avaliacao.autor.id}}">Apagar</button>
+                                        </div>
+
+                                        <!-- Modal para apagar uma avaliação-->
+                                        <div class="modal fade" id="DeleteModal{{avaliacao.autor.id}}" tabindex="-1" role="dialog" aria-labelledby="DeleteModalLongTitle" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="DeleteModalLongTitle">Apagar <span class="modal-nome">avaliação?</span></h5>
+                                                <span class="modal-span">Tem certeza que deseja apagar essa avaliação de <span class="modal-nome">{{avaliacao.autor.nome}}</span>  do personagem <span class="modal-nome">{{personagem.nome}}?</span>
+                                            </div>
+                                            <div class="modal-body">
+                                                Uma vez apagado, essa avaliação não podera mais ser recuperada!
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                                                <form action="{{url_for('personagens.apagar_avaliacao', personagem_id = personagem.id, autor_id = avaliacao.autor.id )}}" method="POST">
+                                                    <input class="btn btn-danger" type="submit" value="Apagar">
+                                                </form>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
+                                    {% endif %}
+
+                                    
+                            </div>   
+                            
+                        </div>
+                    </div>
+                    
+                    
+                {% endfor %}
+            </div>
+        </div>
+        
+
+            <!-- Botões para a paginação -->
+            <div class="text-center">
+                {% for pagina in avaliacoes.iter_pages(left_edge=3, right_edge=3, left_current=3,right_current=3) %}
+                    {% if pagina %}
+                        {% if pagina == avaliacoes.page%}
+                            <a class="btn btn-danger mb-4" href="{{url_for('personagens.mostrar_personagem', personagem_id = personagem.id, pagina=pagina)}}">{{pagina}}</a>
+                        {% else %}
+                            <a class="btn btn-dark mb-4" href="{{url_for('personagens.mostrar_personagem', personagem_id = personagem.id, pagina=pagina)}}">{{pagina}}</a>
+                    {% endif %}
+                    {% else %}
+                        ...
+                    {% endif %}
+            {% endfor %}
+            </div>
+
+        </fieldset>
+
+        
+    {% endif %}
+
+{% endblock content %}

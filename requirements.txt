@@ -4,4 +4,6 @@ Pillow
 flask_login 
 datetime 
 flask_wtf 
-
+flask_bcrypt
+itsdangerous
+flask-mail

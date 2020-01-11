@@ -1,0 +1,268 @@
+html{
+  height: 100%;
+}
+
+body {
+  background: #0F0F0F;
+  color: #D2D0CC;
+  margin-top: 5rem;
+  background-image: url(bg24.jpg);
+  background-size: cover;
+
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 1em;
+
+  min-height:100%; 
+  padding:0; 
+  margin:0; 
+  position:relative; 
+  background-size: cover;
+
+  background-attachment: fixed;
+  
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #D2D0CC;
+  font-family: 'Supermercado One', cursive;
+}
+
+h2{
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; 
+}
+
+.bg-steel {
+  background-color: #0F0F0F;
+}
+
+.site-header .navbar-nav .nav-link {
+  color: #C60000;
+  font-weight: bold;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: #CE0000;
+  font-weight: bold;
+}
+
+.site-header .navbar-nav .nav-link.active {
+  font-weight: 800;
+}
+
+.content-section {
+  background: #0F0F0F;
+  padding: 10px 30px;
+  border: 1px solid #0F0F0F;
+  border-radius: 11px;
+  margin-bottom: 20px;
+  
+}
+
+.article-title {
+  color: #C60000;
+}
+
+a.article-title:hover {
+  color: #C60000;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  /*border-bottom: 1px solid #e3e3e3*/
+}
+
+.article-metadata a {
+  color: #D2D0CC;
+  text-decoration: none;
+}
+
+.article-metadata a:hover {
+  color: #9F0000;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-bottom: 16px;
+  border-radius: 15px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+.btn-danger {
+  background: #CE0000;
+  border-color: #9F0000;
+}
+
+a {
+  color: #CE0000;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #9F0000;
+
+}
+
+.btn-danger:hover {
+  background: #CE0000;
+  border-color: #9F0000;
+}
+
+.btn-dark {
+  background: #161616;
+  border-color: black
+}
+
+.btn-dark:hover {
+  background: #161616;
+  border-color: black
+}
+
+.page-footer{
+  background-color: #141515; 
+}
+
+footer a{
+  color: #9F0000;
+}
+
+.modal-content{
+  background-color: #0F0F0F;
+  color: #D2D0CC
+}
+
+.modal-nome{
+  color: #9F0000;
+}
+
+.modal-span{
+  color: #CE0000;
+  text-decoration: none;
+  text-shadow:  none;
+  margin-left: 25px;
+}
+
+@media (max-width: 450px) { 
+  .procurar1{
+    margin-left: 6.5%;;
+  }
+  .status{
+    margin-left: 0px;;
+  }
+}
+
+@media (min-width: 510px) { 
+  .procurar1{
+    margin-left: 4.2%;
+  }
+  .status{
+    margin-left: 4.2%;
+  }
+}
+
+.jumbotron{
+  background: #0F0F0F;
+}
+
+.jumbotron-heading{
+  color: #CE0000;
+}
+
+.btn-primary{
+  background: #CE0000;
+  border-color: #9F0000;
+}
+
+.btn-primary:hover{
+  background: #9F0000;
+  border-color: #CE0000;
+}
+
+.btn-lg:hover{
+  text-decoration: none;
+}
+
+.personagemfoto{
+  width: 200px;
+  height: 200px;;
+}
+
+.fonte_mec{
+  font-family: 'Supermercado One', cursive;
+}
+
+.login{
+  align-content: center;
+  width: 60%;
+}
+
+.card{
+  background: #0F0F0F;
+  border: 1px solid #0F0F0F;
+  border-radius: 11px;
+  margin-bottom: 20px;
+}
+
+.card a{
+  text-decoration: none;;
+}
+
+.card img{
+  border-radius: 15px;
+}
+
+.clearfix{
+  text-align: justify;
+}
+
+.vermelho{
+  color: #CE0000;
+}
+
+.aviso_erro{
+  padding: 20%;
+  padding-left: 5%;
+  padding-top: 5%;
+  width: 100%;
+  height: 100%;
+}
+
+body::after{ content:''; display:block; height:100px; }
+
+footer{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:100px;
+
+}
+
+.principal1{
+  margin-top: 100px;
+  margin-bottom: 50px;
+}

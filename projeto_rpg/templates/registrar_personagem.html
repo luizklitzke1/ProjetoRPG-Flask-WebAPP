@@ -1,0 +1,204 @@
+{% extends "layout.html" %}
+{% block content %}
+
+    <div class="content-section p-4 pl-4 pr-4">
+
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form_personagem.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Registrar Personagem</legend>
+
+                <!-- Nome do personagem-->
+                <div class="form-group row pr-3 pl-3">
+                    {{ form_personagem.nome.label(class="form-control-label") }}
+                    {% if form_personagem.nome.errors %}
+                        {{ form_personagem.nome(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form_personagem.nome.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form_personagem.nome(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <div class="row">
+                    <!-- Raça do personagem-->
+                    <div class="form-group col-sm-6">
+                        {{ form_personagem.raca.label(class="form-control-label") }}
+                        {% if form_personagem.raca.errors %}
+                            {{ form_personagem.raca(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form_personagem.raca.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_personagem.raca(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+
+                    <!-- Classe do personagem-->
+                    <div class="form-group col-sm-6">
+                        {{ form_personagem.classe.label(class="form-control-label") }}
+                        {% if form_personagem.classe.errors %}
+                            {{ form_personagem.classe(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form_personagem.classe.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_personagem.classe(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Nível do personagem-->
+                <div class="form-group">
+                    {{ form_personagem.nivel.label(class="form-control-label", type="number", min="1", max="99") }}
+                    {% if form_personagem.nivel.errors %}
+                        {{ form_personagem.nivel(class="form-control form-control-lg is-invalid", type="number", min="1", max="99")  }}
+                        <div class="invalid-feedback">
+                            {% for error in form_personagem.nivel.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form_personagem.nivel(class="form-control form-control-lg", type="number", min="1", max="99" ) }}
+                    {% endif %}
+                </div>
+
+                <div class="row">
+                    <!-- Força-->
+                    <div class="form-group col-sm-4">
+                        {{ form_personagem.forca.label(class="form-control-label", type="number", min="1", max="99") }}
+                        {% if form_personagem.forca.errors %}
+                            {{ form_personagem.forca(class="form-control form-control-lg is-invalid", type="number", min="1", max="99" ) }}
+                            <div class="invalid-feedback">
+                                {% for error in form_personagem.forca.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_personagem.forca(class="form-control form-control-lg", type="number", min="1", max="99" ) }}
+                        {% endif %}
+                    </div>
+
+                    <!-- Destreza -->
+                    <div class="form-group col-sm-4">
+                        {{ form_personagem.destreza.label(class="form-control-label", type="number", min="1", max="99") }}
+                        {% if form_personagem.destreza.errors %}
+                            {{ form_personagem.destreza(class="form-control form-control-lg is-invalid", type="number", min="1", max="99") }}
+                            <div class="invalid-feedback">
+                                {% for error in form_personagem.destreza.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_personagem.destreza(class="form-control form-control-lg", type="number", min="1", max="99") }}
+                        {% endif %}
+                    </div>
+
+                    <!-- Constituicao -->
+                    <div class="form-group col-sm-4">
+                        {{ form_personagem.constituicao.label(class="form-control-label", type="number", min="1", max="99" ) }}
+                        {% if form_personagem.constituicao.errors %}
+                            {{ form_personagem.constituicao(class="form-control form-control-lg is-invalid", type="number", min="1", max="99" ) }}
+                            <div class="invalid-feedback">
+                                {% for error in form_personagem.constituicao.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_personagem.constituicao(class="form-control form-control-lg ", type="number", min="1", max="99") }}
+                        {% endif %}
+                    </div>
+
+                </div>
+                <div class="row">
+                <!-- Inteligencia -->
+                    <div class="form-group col-sm-4">
+                        {{ form_personagem.inteligencia.label(class="form-control-label ", type="number", min="1", max="99") }}
+                        {% if form_personagem.inteligencia.errors %}
+                            {{ form_personagem.inteligencia(class="form-control form-control-lg is-invalid", type="number", min="1", max="99" ) }}
+                            <div class="invalid-feedback">
+                                {% for error in form_personagem.inteligencia.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_personagem.inteligencia(class="form-control form-control-lg ", type="number", min="1", max="99") }}
+                        {% endif %}
+                    </div>
+
+                    <!-- Sabedoria -->
+                    <div class="form-group col-sm-4">
+                        {{ form_personagem.sabedoria.label(class="form-control-label ", type="number", min="1", max="99") }}
+                        {% if form_personagem.sabedoria.errors %}
+                            {{ form_personagem.sabedoria(class="form-control form-control-lg is-invalid ", type="number", min="1", max="99") }}
+                            <div class="invalid-feedback">
+                                {% for error in form_personagem.sabedoria.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_personagem.sabedoria(class="form-control form-control-lg ", type="number", min="1", max="99") }}
+                        {% endif %}
+                    </div>
+
+                    <!-- Carisma -->
+                    <div class="form-group col-sm-4">
+                        {{ form_personagem.carisma.label(class="form-control-label ", type="number", min="1", max="99") }}
+                        {% if form_personagem.carisma.errors %}
+                            {{ form_personagem.carisma(class="form-control form-control-lg is-invalid ", type="number", min="1", max="99") }}
+                            <div class="invalid-feedback">
+                                {% for error in form_personagem.carisma.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form_personagem.carisma(class="form-control form-control-lg ", type="number", min="1", max="99") }}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Historia -->
+                <div class="form-group">
+                    {{ form_personagem.historia.label(class="form-control-label") }}
+                    {% if form_personagem.historia.errors %}
+                        {{ form_personagem.historia(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form_personagem.historia.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form_personagem.historia(class="form-control form-control-lg") }}
+                    {% endif %}
+                
+                </div>
+
+                <!-- Foto de referência -->
+                <div class="form-group">
+                    {{ form_personagem.foto_referencia.label() }}
+                    {{ form_personagem.foto_referencia(class='form-control-file') }}
+                    {% if form_personagem.foto_referencia.errors %}
+                            {% for error in form_personagem.foto_referencia.errors %}
+                                <span class='text-danger'>{{ error }}</span></br>
+                            {% endfor %}
+                    {% endif %}
+                </div>
+
+                <!-- Enviar -->
+                <div class="form-group text-right">
+                    {{ form_personagem.botao_enviar(class="btn btn-success") }}
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+
+
+{% endblock content %}
