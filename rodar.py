@@ -1,4 +1,4 @@
-from projeto_rpg import app
+from back_end import app
 
 #Rodar Programa ao executar esse módulo
 if __name__ == '__main__':
