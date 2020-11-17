@@ -10,7 +10,7 @@ Desenvolvido na disciplina de Programação do segundo ano de **Técnico de Info
 A estrutura e funcionalidade do projeto foram planejadas para a disciplina de **Engenharia de Sofwate** e podem ser econtrados em:
 
 * [Diagrama de Casos de Uso](https://drive.google.com/file/d/1f9U2Ca80Q15Q7hxFw4ebObOhR_xMrVkx/view?usp=sharing) - Divisão das persmissões e limitações de cada nível de usuário.
-* [Diagrama de Classes - UML ](https://drive.google.com/file/d/1pBuheuSDi55kohThvQFVvEgnJPgzokpB/view?usp=sharing) - Utilizado como base para as funcionalidades e lógica das classes.
+* [Diagrama de Classes - UML ](https://cdn.discordapp.com/attachments/419058354187403264/777969219946020884/unknown.png) - Utilizado como base para as funcionalidades e lógica das classes.
 * [Requisitos Funcionais e Não-Funcionais](https://drive.google.com/file/d/1PWxJt2yFt8fbNCbKFLRKZgQPZ4GM0LYl/view?usp=sharing) - Requisitos levantados para o projeto.
 * [Diagrama de Atividade para Login e Edição de Personagens ](https://drive.google.com/file/d/165e2T-PaWqprlfVevT9Vl2jfIrJ6jjBq/view?usp=sharing) - Base para o funcionamento  e restrições do login de usuários e da edição de personagens.
 
