@@ -7,3 +7,4 @@ flask_wtf
 flask_bcrypt
 itsdangerous
 flask-mail
+email_validator
