@@ -2,7 +2,7 @@
 
 Aplicação Web em Python desenvolvida utilizando, principalmente, **Flask**, **Jinja2** e **SQL Alchemy**, com a finalidade de representar um **CRUD** para personagens de RPG.
 
-##📜 Desenvolvimento do projeto
+## 📜 Desenvolvimento do projeto
 
 O site foi projetado como um aprendizado e prática para o desenvolvimento de aplicações WEB utilizando Python e suas diversas bibliotecas que vem a facilitar o processo.
 Desenvolvido na disciplina de Programação do segundo ano de **Técnico de Informática no Instituto Federal Catarinense - Campus Blumenau**.
@@ -85,7 +85,7 @@ Para buscar por um personagem, pode-se escolher preencher uma série de campos s
 
 Tal processo de pesquisar seguinda alguns parametros informados, ou nãom, pode ser visto de forma resumida nessa parte do código:
 
-```
+```python
 personagens = db.session.query(Personagem).filter(
                                                  Personagem.nome.like(f"%{form_procurar_pers.nome.data}%"),
                                                  Personagem.raca.like(f"%{form_procurar_pers.raca.data}%"),
